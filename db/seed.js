@@ -8,7 +8,8 @@ const {
 
 async function dropTables() {
   // Drop all tables in order
-  await client.query(`DELETE table IF EXIST`);
+  console.log("Starting to drop tables...");
+  await client.query(`DROP TABLE IF EXISTS`);
 }
 
 async function createTables() {
