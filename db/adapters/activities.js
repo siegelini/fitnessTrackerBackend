@@ -13,6 +13,7 @@ async function createActivities({ name, descritpiton }) {
       `,
       [name, descritpiton]
     );
+    return activity;
   } catch (error) {
     throw error;
   }
