@@ -85,6 +85,18 @@ async function populateTables() {
       await createActivities(activity);
     }
     console.log("...activities created");
+
+    for (const routine of routines) {
+      console.log("Routines:", routine);
+      await createRoutines(routine);
+    }
+    console.log("...routines created");
+
+    for (const routine_activity of routine_activities) {
+      console.log("Routines and Activities:", routine_activity);
+      await createRoutineActivities(routine_activity);
+    }
+    console.log("...routine_activities created");
   } catch (error) {
     console.error(error);
   }
