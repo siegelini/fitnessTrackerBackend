@@ -1,4 +1,5 @@
 const client = require("./client");
+//imports
 const { createUser } = require("./adapters/users");
 const { createActivities } = require("./adapters/activities");
 const { createRoutines } = require("./adapters/routines");
