@@ -29,7 +29,7 @@ async function getRoutineById(id) {
     SELECT *
     FROM routines
     JOIN activities ON routine.id = activities.routine_id
-    WHERE routines.id = $1
+    WHERE routines.id = $1;
     `,
       [id]
     );
@@ -39,9 +39,46 @@ async function getRoutineById(id) {
   }
 }
 
-async function getRoutinesWithoutActivities() {}
+async function getRoutinesWithoutActivities() {
+  try {
+    console.log("...getting routines without activities");
+    const {
+      rows: [routine],
+    } = await client.query(`
+  SELECT *
+  FROM routines;
+  `);
+    return routine;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllRoutines() {
+  try {
+    console.log("..getting all routines");
+    const {
+      rows: [routine],
+    } = await client.query(`
+    SELECT *
+    FROM routines
+    JOIN activities ON routines;
+    `);
+    return routine;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllPublicRoutines() {
+  try {
+    console.log("...getting all public routines");
+  } catch (error) {}
+}
 
 module.exports = {
   createRoutines,
   getRoutineById,
+  getRoutinesWithoutActivities,
+  getAllRoutines,
 };
