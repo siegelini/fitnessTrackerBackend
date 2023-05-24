@@ -7,8 +7,14 @@ const activities = [
   { name: "Bench Press", description: "This targets the pectoral muscles." },
   { name: "Dumbell Curls", description: "This targets the biceps." },
 ];
-const routines = [];
-const routine_activities = [];
+const routines = [
+  { name: "Cardio", goal: "Walk for 10 minutes daily." },
+  { name: "Eat Healthy", goal: "Eat 2,000 calories daily." },
+];
+const routine_activities = [
+  { duration: 5, count: 15 },
+  { duration: 5, count: 3 },
+];
 
 module.exports = { users, activities, routines, routine_activities };
 

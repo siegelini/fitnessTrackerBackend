@@ -1,6 +1,10 @@
 const client = require("./client");
+//imports
 const { createUser } = require("./adapters/users");
 const { createActivities } = require("./adapters/activities");
+const { createRoutines } = require("./adapters/routines");
+const { createRoutineActivities } = require("./adapters/routine_activities");
+
 const {
   users,
   activities,
@@ -42,6 +46,26 @@ async function createTables() {
       description TEXT NOT NULL
     )
     `);
+
+    await client.query(`
+    CREATE TABLE routines(
+      id SERIAL PRIMARY KEY,
+      creator_id INTEGER REFERENCES users(id),
+      is_public BOOLEAN DEFAULT false,
+      name VARCHAR(255) UNIQUE NOT NULL,
+      goal TEXT NOT NULL
+    )
+    `);
+
+    await client.query(`
+    CREATE TABLE RoutineActivities(
+      id SERIAL PRIMARY KEY,
+      routine_id INTEGER REFERENCES routines ( id ),
+      activity_id INTEGER REFERENCES activities ( id ),
+      duration INTEGER,
+      count INTEGER
+    )
+    `);
   } catch (error) {
     console.error(error);
   }
@@ -59,6 +83,7 @@ async function populateTables() {
     for (const activity of activities) {
       await createActivities(activity);
     }
+    console.log("...activities created");
   } catch (error) {
     console.error(error);
   }
