@@ -20,7 +20,7 @@ authRouter.post("/register", async (req, res, next) => {
 
     // const token = jwt.sign(user, JWT_SECRET);
 
-    res.json({ token });
+    res.json(user);
   } catch (error) {
     next(error);
   }
