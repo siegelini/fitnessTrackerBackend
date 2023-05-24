@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+router.use("/auth", require("./auth"));
 router.get("/health", (req, res, next) => {
   try {
     res.send("API is Healthy 😎!");
