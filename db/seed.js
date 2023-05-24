@@ -18,8 +18,8 @@ async function dropTables() {
   try {
     await client.query(`
         DROP TABLE IF EXISTS routine_activities;
-        DROP TABLE IF EXISTS routines;
         DROP TABLE IF EXISTS activities;
+        DROP TABLE IF EXISTS routines;
         DROP TABLE IF EXISTS users;
     `);
   } catch (error) {
@@ -58,7 +58,7 @@ async function createTables() {
     `);
 
     await client.query(`
-    CREATE TABLE RoutineActivities(
+    CREATE TABLE routine_activities(
       id SERIAL PRIMARY KEY,
       routine_id INTEGER REFERENCES routines ( id ),
       activity_id INTEGER REFERENCES activities ( id ),
@@ -81,6 +81,7 @@ async function populateTables() {
     console.log("...users created");
 
     for (const activity of activities) {
+      console.log("Activities:", activity);
       await createActivities(activity);
     }
     console.log("...activities created");

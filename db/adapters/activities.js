@@ -1,6 +1,6 @@
 const client = require("../client");
 
-async function createActivities({ name, descritpiton }) {
+async function createActivities({ name, description }) {
   try {
     console.log("Starting to insert ACTIVITIES into db");
     const {
@@ -11,7 +11,7 @@ async function createActivities({ name, descritpiton }) {
       VALUES ($1, $2)
       RETURNING *;
       `,
-      [name, descritpiton]
+      [name, description]
     );
     return activity;
   } catch (error) {
