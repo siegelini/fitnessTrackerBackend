@@ -73,7 +73,72 @@ async function getAllRoutines() {
 async function getAllPublicRoutines() {
   try {
     console.log("...getting all public routines");
-  } catch (error) {}
+    const {
+      rows: [routine],
+    } = await client.query(`
+    SELECT *
+    FROM routines
+    WHERE is_public = true
+    JOIN activities ON routine.id = activities.routine_id;
+    `);
+    return routine;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllRoutinesByUser(username) {
+  try {
+    console.log("...getting all routines by user");
+    const {
+      rows: [routine],
+    } = await client.query(
+      `
+     SELECT *
+     FROM routines
+     WHERE creator_id = $1  
+     JOIN activities ON routine.id = activities.routine_id;
+     `,
+      [username]
+    );
+    return routine;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getPublicRoutinesByUser(username) {
+  try {
+    console.log("...getting all public routines by user");
+    const {
+      rows: [routine],
+    } = await client.query(
+      `
+    SELELCT *
+    FROM routines
+    WHERE creator_id = $1 AND is_public = true
+    JOIN activities ON routines.id = activities.routine_id;
+    `,
+      [username]
+    );
+    return routine;
+  } catch (error) {
+    throw error;
+  }
+}
+//need to refer to SQL to finish this one
+async function getPublicRoutinesByActivity(activity_id) {
+  try {
+    console.log("...getting all public routines by activity");
+    const {
+      rows: [routine],
+    } = await client.query(`
+    SELECT *
+    FROM routines
+    WHERE id IN ()`);
+  } catch (error) {
+    throw error;
+  }
 }
 
 module.exports = {
@@ -81,4 +146,7 @@ module.exports = {
   getRoutineById,
   getRoutinesWithoutActivities,
   getAllRoutines,
+  getAllPublicRoutines,
+  getAllRoutinesByUser,
+  getPublicRoutinesByUser,
 };
