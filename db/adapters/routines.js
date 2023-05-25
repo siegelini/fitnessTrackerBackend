@@ -73,7 +73,27 @@ async function getAllRoutines() {
 async function getAllPublicRoutines() {
   try {
     console.log("...getting all public routines");
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getAllRoutinesByUser({ username }) {
+  try {
+    console.log("...getting all routines by users");
+    const {
+      rows: [routine],
+    } = await client.query(
+      `
+    SELECT *
+    FROM routines
+    JOIN activities ON routine_id = routine_activities_id;
+    `,
+      [username]
+    );
+  } catch (error) {
+    throw error;
+  }
 }
 
 module.exports = {
@@ -81,4 +101,6 @@ module.exports = {
   getRoutineById,
   getRoutinesWithoutActivities,
   getAllRoutines,
+  getAllPublicRoutines,
+  getAllRoutinesByUser,
 };
