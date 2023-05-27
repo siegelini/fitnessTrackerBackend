@@ -24,6 +24,108 @@ async function createRoutineActivities({
   }
 }
 
+async function getRoutineActivityById(routineActivityId) {
+  try {
+    console.log("...getting routine_activity by id");
+    const {
+      rows: [routine_activity],
+    } = await client.query(
+      `
+    SELECT *
+    WHERE id=$1;
+    `,
+      [routineActivityId]
+    );
+    return routine_activity;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function addActivityToRoutine({
+  routine_id,
+  activity_id,
+  count,
+  duration,
+}) {
+  try {
+    console.log("adding activity to routine");
+    // CREATE TABLE routine_activity???
+    const {
+      rows: [routine_activity],
+    } = await client.query(
+      `
+    
+    `,
+      [routine_id, activity_id, count, duration]
+    );
+    return routine_activity;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateRoutineActivity({ routineActivityId, count, duration }) {
+  try {
+    console.log("updating RoutineActivity");
+    const {
+      rows: [routine_activity],
+    } = await client.query(
+      `
+    SELECT * 
+    FROM routine_activities
+    WHERE id = ${routineActivityId}
+    UPDATE routine_activity SET count=$1, duration=$2;
+    `,
+      [routineActivityId, count, duration]
+    );
+    return routine_activity;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function destroyRoutineActivity({ routineActivityId }) {
+  try {
+    console.log("deleting RoutineActivities");
+    const {
+      rows: [routine_activity],
+    } = await client.query(
+      `
+    DELETE routine_activities
+    WHERE id=$1;
+    `,
+      [routineActivityId]
+    );
+    return routine_activity;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getRoutineActivitiesByRoutine({ routine_id }) {
+  try {
+    console.log("getting routine_activities by routines");
+    const {
+      rows: [routine_activity],
+    } = await client.query(
+      `
+    SELECT *
+    FROM routine_activity
+    `,
+      [routine_id]
+    );
+    return routine_activity;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   createRoutineActivities,
+  getRoutineActivityById,
+  addActivityToRoutine,
+  updateRoutineActivity,
+  destroyRoutineActivity,
+  getRoutineActivitiesByRoutine,
 };
