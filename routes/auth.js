@@ -1,26 +1,16 @@
+const authRouter = require("express").Router();
 const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+const SALT_ROUNDS = 10;
 const { createUser } = require("../db/adapters/users");
 
-const SALT_ROUNDS = 10;
-// const JWT_SECRET = "your-secret-key";
-
-const express = require("express");
-const authRouter = express.Router();
-
-authRouter.post("/register", async (req, res, next) => {
+//POST /api/auth/signup
+authRouter.post("/signup", async (req, res, next) => {
+  // 404 error  on POST api/auth/signup
   try {
     const { username, password } = req.body;
-
-    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-
+    const hashedPassword = bcrypt.hash(password, SALT_ROUNDS);
     const user = await createUser({ username, password: hashedPassword });
-
-    delete user.password;
-
-    // const token = jwt.sign(user, JWT_SECRET);
-
-    res.json(user);
+    res.send(user);
   } catch (error) {
     next(error);
   }

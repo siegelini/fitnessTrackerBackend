@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-router.use("/auth", require("./auth"));
 router.get("/health", (req, res, next) => {
   try {
     res.send("API is Healthy 😎!");
@@ -8,6 +7,9 @@ router.get("/health", (req, res, next) => {
     next(error);
   }
 });
+
+router.use("/users", require("./users"));
+router.use("/auth", require("./auth"));
 
 // Hook up other Routers ex: router.use('/users', require('./users'))
 
