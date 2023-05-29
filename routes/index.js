@@ -8,6 +8,7 @@ router.get("/health", (req, res, next) => {
   }
 });
 
+router.post("delete");
 router.use("/users", require("./users"));
 router.use("/auth", require("./auth"));
 
