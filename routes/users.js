@@ -1,5 +1,5 @@
-const { getUserByUsername } = require("../db/adaptors/users");
-const { verifyToken } = require("..");
+const { getUserByUsername } = require("../db/adapters/users");
+const { verifyToken } = require("../routes/utility");
 
 const express = require("express");
 const userRouter = express.Router();

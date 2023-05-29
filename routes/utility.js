@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = "your-secret-key";
 
 function verifyToken(req, res, next) {
   const token = req.headers.authorization?.split(" ")[1]; // Extract token from "Bearer <token>"
