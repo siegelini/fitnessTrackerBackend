@@ -32,6 +32,7 @@ async function getRoutineActivityById(routineActivityId) {
     } = await client.query(
       `
     SELECT *
+    FROM routine_activities
     WHERE id=$1;
     `,
       [routineActivityId]
@@ -50,12 +51,13 @@ async function addActivityToRoutine({
 }) {
   try {
     console.log("adding activity to routine");
-    // CREATE TABLE routine_activity???
     const {
       rows: [routine_activity],
     } = await client.query(
       `
-    
+    INSERT INTO routine_activities(routine_id, activity_id, count, duration)
+    VALUES($1,$2,$3,$4)
+    RETURNING *;
     `,
       [routine_id, activity_id, count, duration]
     );
@@ -112,6 +114,7 @@ async function getRoutineActivitiesByRoutine({ routine_id }) {
       `
     SELECT *
     FROM routine_activity
+    WHERE id = $1;
     `,
       [routine_id]
     );
