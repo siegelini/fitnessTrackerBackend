@@ -1,4 +1,5 @@
 const { getUserByUsername } = require("../db/adapters/users");
+
 const { verifyToken } = require("../routes/utility");
 
 const express = require("express");
