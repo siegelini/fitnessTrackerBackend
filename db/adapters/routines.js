@@ -1,6 +1,6 @@
 const client = require("../client");
 
-async function createRoutines({ name, goal }) {
+async function createRoutines({ name, goal, creator_id }) {
   try {
     console.log("starting to insert ROUTINES into db ");
     const {
@@ -11,7 +11,7 @@ async function createRoutines({ name, goal }) {
     VALUES ($1, $2)
     RETURNING *;
     `,
-      [name, goal]
+      [name, goal, creator_id]
     );
     return routine;
   } catch (error) {

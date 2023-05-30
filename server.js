@@ -17,9 +17,11 @@ const authRouter = require("./routes/auth");
 const userRouter = require("./routes/users");
 const activitiesRouter = require("./routes/activities");
 app.use("/api", require("./routes"));
-app.use("/routes/auth.js", authRouter);
-app.use("/routes/users.js", userRouter);
+app.use("/routes/auth", authRouter);
+app.use("/routes/users", userRouter);
 app.use("/activities", activitiesRouter);
+
+app.use("/api/routines", require("./routes/routines"));
 
 // Error Handler
 app.use((err, req, res, next) => {
