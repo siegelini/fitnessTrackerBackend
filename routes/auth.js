@@ -1,10 +1,8 @@
-require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { createUser, getUserByUsername } = require("../db/adapters/users");
-
 const SALT_ROUNDS = 10;
-const JWT_SECRET = process.env.JWT_SECRET;
+const { JWT_SECRET, COOKIE_SECRET } = process.env;
+const { createUser, getUserByUsername } = require("../db/adapters/users");
 
 const express = require("express");
 const authRouter = express.Router();
@@ -14,32 +12,32 @@ authRouter.post("/register", async (req, res, next) => {
     const { username, password } = req.body;
 
     if (password.length < 8) {
-      throw {
-        name: "ValidationError",
+      next({
         message: "Password should be at least 8 characters long.",
-      };
+        name: "Authorization Error",
+      });
     }
 
     const existingUser = await getUserByUsername(username);
     if (existingUser) {
-      throw {
-        name: "ValidationError",
+      next({
         message: "Username already exists",
-      };
+        name: "Authorization Error",
+      });
+      return;
     }
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-
     const user = await createUser({ username, password: hashedPassword });
 
-    const token = jwt.sign(
-      { id: user.id, username: user.username },
-      JWT_SECRET
-    );
+    const token = jwt.sign(user, JWT_SECRET, { expiresIn: "1w" });
+    res.cookie("token", token, {
+      sameSite: "strict",
+      httpOnly: true,
+      signed: true,
+    });
 
-    delete user.password;
-
-    res.json({ token, user: { id: user.id, username: user.username } });
+    res.send(user);
   } catch (error) {
     next(error);
   }
@@ -65,12 +63,12 @@ authRouter.post("/login", async (req, res, next) => {
       };
     }
 
-    const token = jwt.sign(
-      { id: user.id, username: user.username },
-      JWT_SECRET
-    );
-
-    res.json({ token, user: { id: user.id, username: user.username } });
+    const token = jwt.sign(user, JWT_SECRET, { expiresIn: "1w" });
+    res.cookie("token", token, {
+      sameSite: "strict",
+      httpOnly: true,
+      signed: true,
+    });
   } catch (error) {
     next(error);
   }
