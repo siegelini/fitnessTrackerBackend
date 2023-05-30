@@ -4,6 +4,12 @@ const { verifyToken } = require("../routes/utility");
 const express = require("express");
 const userRouter = express.Router();
 
+//GET /api/users/
+userRouter.get("/", (req, res, next) => {
+  res.send("USERS COMING SOON!");
+});
+
+//GET /api/users/me
 userRouter.get("/me", verifyToken, async (req, res, next) => {
   try {
     const { id, username } = req.user;
@@ -13,6 +19,7 @@ userRouter.get("/me", verifyToken, async (req, res, next) => {
   }
 });
 
+//GET api/:username/routines
 userRouter.get("/:username/routines", async (req, res, next) => {
   try {
     const { username } = req.params;
