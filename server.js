@@ -2,22 +2,19 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const authRouter = require("./routes/auth");
-const userRouter = require("./routes/users");
+const cookieParser = require("cookie-parser");
 const PORT = 3000;
-
 const app = express();
 
-app.get("/", (req, res, next) => {
-  res.send("Hello");
-});
-
 // Middleware
-app.use(morgan("dev"));
 app.use(express.json());
+app.use(morgan("dev"));
 app.use(cors());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // Routes
+const authRouter = require("./routes/auth");
+const userRouter = require("./routes/users");
 app.use("/api", require("./routes"));
 app.use("/routes/auth.js", authRouter);
 app.use("/routes/users.js", userRouter);
