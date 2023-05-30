@@ -15,6 +15,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 // Routes
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/users");
+const activitiesRouter = require("./routes/activities");
 app.use("/api", require("./routes"));
 app.use("/routes/auth.js", authRouter);
 app.use("/routes/users.js", userRouter);
