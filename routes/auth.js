@@ -76,6 +76,8 @@ authRouter.post("/login", async (req, res, next) => {
 
 authRouter.get("/logout", async (req, res, next) => {
   try {
+    // need to clear jwt or just the 1 week expire ok?
+    res.clearCookie("token"); // Clear the token cookie
     res.json({ message: "Logout successful" });
   } catch (error) {
     next(error);
