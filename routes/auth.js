@@ -7,6 +7,11 @@ const { createUser, getUserByUsername } = require("../db/adapters/users");
 const express = require("express");
 const authRouter = express.Router();
 
+//GET api/auth/
+authRouter.get("/", (req, res, next) => {
+  res.send("We have the Auth router!!!");
+});
+
 authRouter.post("/register", async (req, res, next) => {
   try {
     const { username, password } = req.body;
@@ -19,6 +24,7 @@ authRouter.post("/register", async (req, res, next) => {
     }
 
     const existingUser = await getUserByUsername(username);
+    console.log({ existingUser });
     if (existingUser) {
       next({
         message: "Username already exists",
