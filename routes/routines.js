@@ -3,6 +3,11 @@ const { getAllRoutines, createRoutine } = require("../db/adapters/routines");
 const express = require("express");
 const routinesRouter = express.Router();
 
+//GET /api/routines/
+routinesRouter.get("/", (req, res, next) => {
+  res.send("We have Routines!!!");
+});
+
 //GET /api/routines
 routinesRouter.get("/routines", async (req, res, next) => {
   try {
