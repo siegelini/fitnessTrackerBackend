@@ -47,7 +47,7 @@ async function getRoutineById(id) {
     LEFT JOIN routine_activities 
     ON routines.id = routine_activities.routine_id
     LEFT JOIN activities 
-    ON routine.id = activities.routine.routine_id
+    ON routines.id = routine_activities.routine_id
     WHERE routines.id = $1
     GROUP BY routines.id, routine_activities.routine_id
     `,
