@@ -17,6 +17,7 @@ routinesRouter.get("/", async (req, res, next) => {
   }
 });
 
+//POST /api/routines
 routinesRouter.post("/", async (req, res, next) => {
   try {
     const { name, goal, creator_id, is_public } = req.body;
@@ -32,6 +33,7 @@ routinesRouter.post("/", async (req, res, next) => {
   }
 });
 
+//PATCH /api/routineId
 routinesRouter.patch("/:routineId", async (req, res, next) => {
   try {
     const { routineId } = req.params;
@@ -46,6 +48,7 @@ routinesRouter.patch("/:routineId", async (req, res, next) => {
   }
 });
 
+//DELETE /api/:routineId
 routinesRouter.delete("/:routineId", async (req, res, next) => {});
 
 module.exports = routinesRouter;
