@@ -1,4 +1,8 @@
-const { getAllRoutines, createRoutine } = require("../db/adapters/routines");
+const {
+  getAllRoutines,
+  createRoutine,
+  updateRoutine,
+} = require("../db/adapters/routines");
 
 const express = require("express");
 const routinesRouter = express.Router();
@@ -13,23 +17,38 @@ routinesRouter.get("/", async (req, res, next) => {
   }
 });
 
+//POST /api/routines
 routinesRouter.post("/", async (req, res, next) => {
   try {
-    const { name, goal, creator_id } = req.body;
-    const newRoutine = await createRoutine({ name, goal, creator_id });
-    if (newRoutine) {
-      res.send(newRoutine);
-    } else {
-      next({
-        name: "RoutineCreationError",
-        message: "There was an error creating your routine. Please try again.",
-      });
-    }
+    const { name, goal, creator_id, is_public } = req.body;
+    const newRoutine = await createRoutine({
+      name,
+      goal,
+      creator_id,
+      is_public,
+    });
+    res.send(newRoutine);
   } catch (error) {
     next(error);
   }
 });
 
-routinesRouter.patch("/:routineId");
+//PATCH /api/routineId
+routinesRouter.patch("/:routineId", async (req, res, next) => {
+  try {
+    const { routineId } = req.params;
+    const { name, goal } = req.body;
+    const updatedRoutine = await updateRoutine(routineId, {
+      name,
+      goal,
+    });
+    res.send(updatedRoutine);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//DELETE /api/:routineId
+routinesRouter.delete("/:routineId", async (req, res, next) => {});
 
 module.exports = routinesRouter;
