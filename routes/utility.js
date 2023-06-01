@@ -4,7 +4,7 @@ const verifyToken = (req, res, next) => {
   try {
     const token = req.signedCookies.token;
     console.log("Token: ", token);
-    jwt.verify(token, process.env.JWT_SECRET);
+    req.user = jwt.verify(token, process.env.JWT_SECRET);
   } catch (error) {
     res.send(401).send({
       loggedIn: false,
