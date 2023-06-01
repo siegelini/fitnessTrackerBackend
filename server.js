@@ -1,3 +1,4 @@
+console.clear(); //clears the console...
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");

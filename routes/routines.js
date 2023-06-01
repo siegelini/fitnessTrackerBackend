@@ -3,13 +3,8 @@ const { getAllRoutines, createRoutine } = require("../db/adapters/routines");
 const express = require("express");
 const routinesRouter = express.Router();
 
-//GET /api/routines/
-routinesRouter.get("/", (req, res, next) => {
-  res.send("We have Routines!!!");
-});
-
 //GET /api/routines
-routinesRouter.get("/routines", async (req, res, next) => {
+routinesRouter.get("/", async (req, res, next) => {
   try {
     const routines = await getAllRoutines();
     res.send(routines);
@@ -18,12 +13,10 @@ routinesRouter.get("/routines", async (req, res, next) => {
   }
 });
 
-routinesRouter.post("/routines", async (req, res, next) => {
+routinesRouter.post("/", async (req, res, next) => {
   try {
     const { name, goal, creator_id } = req.body;
-
     const newRoutine = await createRoutine({ name, goal, creator_id });
-
     if (newRoutine) {
       res.send(newRoutine);
     } else {
@@ -36,5 +29,7 @@ routinesRouter.post("/routines", async (req, res, next) => {
     next(error);
   }
 });
+
+routinesRouter.patch("/:routineId");
 
 module.exports = routinesRouter;
