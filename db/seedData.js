@@ -6,17 +6,14 @@ const users = [
 ];
 const activities = [
   {
-    activityId: 1,
     name: "Bench Press",
     description: "This targets the pectoral muscles.",
   },
   {
-    activityId: 2,
     name: "Dumbell Curls",
     description: "This targets the biceps.",
   },
   {
-    activityId: 3,
     name: "Best Push Ups",
     description: "One finger like Rocky, clapping at the top",
   },
@@ -28,11 +25,17 @@ const routines = [
     name: "Cardio",
     goal: "Walk for 10 minutes daily.",
   },
-  { creator_id: 2, name: "Eat Healthy", goal: "Eat 2,000 calories daily." },
+  {
+    creator_id: 2,
+    name: "Eat Healthy",
+    goal: "Eat 2,000 calories daily.",
+    is_public: true,
+  },
   {
     creator_id: 3,
     name: "Stay Alive",
     goal: "Run faster than friend being chased by a bear",
+    is_public: false,
   },
 ];
 const routine_activities = [
