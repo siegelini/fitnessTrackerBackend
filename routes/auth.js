@@ -36,7 +36,11 @@ authRouter.post("/register", async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     const user = await createUser({ username, password: hashedPassword });
 
-    const token = jwt.sign(user, JWT_SECRET, { expiresIn: "1w" });
+    const tokenUserNoPassword = { id: user.id, username: user.username };
+    const token = jwt.sign(tokenUserNoPassword, JWT_SECRET, {
+      expiresIn: "1w",
+    });
+
     res.cookie("token", token, {
       sameSite: "strict",
       httpOnly: true,
@@ -75,6 +79,8 @@ authRouter.post("/login", async (req, res, next) => {
       httpOnly: true,
       signed: true,
     });
+
+    res.json({ message: "login successful" });
   } catch (error) {
     next(error);
   }
