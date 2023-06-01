@@ -5,6 +5,7 @@ const {
 } = require("../db/adapters/routines");
 
 const express = require("express");
+const authRouter = require("./auth");
 const routinesRouter = express.Router();
 
 //GET /api/routines
@@ -49,6 +50,6 @@ routinesRouter.patch("/:routineId", async (req, res, next) => {
 });
 
 //DELETE /api/:routineId
-routinesRouter.delete("/:routineId", async (req, res, next) => {});
+routinesRouter.delete("/:routineId", authRouter, (req, res, next) => {});
 
 module.exports = routinesRouter;
