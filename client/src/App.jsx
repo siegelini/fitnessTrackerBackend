@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import Register from "./components/Register";
 import "./App.css";
 
 function App() {
@@ -20,10 +22,17 @@ function App() {
   }, []);
 
   return (
-    <>
-      {error && <p>{JSON.stringify(error, null, 2)}</p>}
-      {healthMessage && <p>{healthMessage}</p>}
-    </>
+    <div>
+      <p>
+        {error && <p>{JSON.stringify(error, null, 2)}</p>}
+        {healthMessage && <p>{healthMessage}</p>}
+      </p>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<Register />} />
+        </Routes>
+      </div>
+    </div>
   );
 }
 
