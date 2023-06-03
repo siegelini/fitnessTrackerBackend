@@ -1,15 +1,18 @@
 const express = require("express");
-const router = express.Router();
+const routineActivitiesRouter = express.Router();
 const {
   createRoutineActivities,
-  getRoutineActivityById,
   updateRoutineActivity,
-  deleteRoutineActivity,
+  destroyRoutineActivity,
 } = require("../db/adapters/routine_activities");
-const { requireUser, requireOwner } = require("./utility");
+
+//if need later to see if logged in, maybe something like this:
+// const { requireUser, requireOwner } = require("./utility");
+// const routinesRouter = require("./routines");
+//obviously will need to update the utility if this is how we go to do it.
 
 // POST /api/routine_activities
-router.post("/", requireUser, async (req, res, next) => {
+routineActivitiesRouter.post("/", requireUser, async (req, res, next) => {
   try {
     const { duration, count, routine_id, activity_id } = req.body;
     const routineActivity = await createRoutineActivities({
@@ -25,7 +28,7 @@ router.post("/", requireUser, async (req, res, next) => {
 });
 
 // PATCH /api/routine_activities/:routineActivityId
-router.patch(
+routineActivitiesRouter.patch(
   "/:routineActivityId",
   requireUser,
   requireOwner,
@@ -46,14 +49,14 @@ router.patch(
 );
 
 // DELETE /api/routine_activities/:routineActivityId
-router.delete(
+routineActivitiesRouter.delete(
   "/:routineActivityId",
   requireUser,
   requireOwner,
   async (req, res, next) => {
     try {
       const { routineActivityId } = req.params;
-      await deleteRoutineActivity({ routineActivityId });
+      await destroyRoutineActivity({ routineActivityId });
       res.sendStatus(204);
     } catch (error) {
       next(error);
@@ -61,5 +64,4 @@ router.delete(
   }
 );
 
-// Export the router
-module.exports = router;
+module.exports = routineActivitiesRouter;
