@@ -2,6 +2,7 @@ const {
   getAllRoutines,
   createRoutine,
   updateRoutine,
+  destroyRoutine,
 } = require("../db/adapters/routines");
 
 const express = require("express");
@@ -50,6 +51,14 @@ routinesRouter.patch("/:routineId", async (req, res, next) => {
 });
 
 //DELETE /api/:routineId
-routinesRouter.delete("/:routineId", authRouter, (req, res, next) => {});
+routinesRouter.delete("/:routineId", authRouter, async (req, res, next) => {
+  try {
+    const { routineId } = req.params;
+    await destroyRoutine(routineId);
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = routinesRouter;

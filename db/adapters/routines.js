@@ -299,7 +299,9 @@ async function updateRoutine(routineId, isPublic, name, goal) {
       [isPublic, name, goal, routineId]
     );
     return routine;
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function destroyRoutine(routineId) {
@@ -319,7 +321,9 @@ async function destroyRoutine(routineId) {
     `,
       [routineId]
     );
-  } catch (error) {}
+  } catch (error) {
+    throw error;
+  }
 }
 
 module.exports = {

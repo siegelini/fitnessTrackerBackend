@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const SALT_ROUNDS = 10;
 const { JWT_SECRET, COOKIE_SECRET } = process.env;
 const { createUser, getUserByUsername } = require("../db/adapters/users");
+const { verifyToken } = require("./utility");
 
 const express = require("express");
 const authRouter = express.Router();
@@ -95,5 +96,7 @@ authRouter.get("/logout", async (req, res, next) => {
     next(error);
   }
 });
+
+authRouter.use(verifyToken);
 
 module.exports = authRouter;
