@@ -18,6 +18,21 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.user-content {
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-form {
+  margin-bottom: 5px;
+  font-size: 12pt;
+  font-weight: bold;
+  text-transform: lowercase;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
