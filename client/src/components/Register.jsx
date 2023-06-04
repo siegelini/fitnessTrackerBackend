@@ -7,6 +7,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
 
   // {setToken, user} = useAuth() hooks
+  // we chould change this page to be called the login page
 
   async function handleSubmit(e) {
     console.log("Username and Password", username, password);
@@ -28,8 +29,8 @@ export default function Register() {
   }
 
   return (
-    <div>
-      <h1>Welcome to Fitness Tracker!</h1>
+    <div className="user-content">
+      <h1 className="title">Welcome to Fitness Tracker!</h1>
       <h2>Login</h2>
       <form>
         <input
@@ -45,7 +46,7 @@ export default function Register() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button>Submit</button>
-        <Link to="/sign-up">Don't have an accout? Sign Up</Link>
+        <Link to="/signup">Don't have an account? Sign Up</Link>
       </form>
     </div>
   );

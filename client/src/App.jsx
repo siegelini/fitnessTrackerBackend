@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Register from "./components/Register";
+import SignUp from "./components/Signup";
 import "./App.css";
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/" element={<Register />} />
+          <Route path="/login" element={<Register />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
     </div>

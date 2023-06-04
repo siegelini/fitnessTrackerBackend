@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
     stack: err.stack,
   });
 });
-// not sure if this is the shortest way to do this but wanted to see the connection
+
 // Connect to PostgreSQL
 client.connect((err) => {
   if (err) {
