@@ -13,6 +13,7 @@ authRouter.get("/", (req, res, next) => {
   res.send("We have the Auth router!!!");
 });
 
+//POST api/register
 authRouter.post("/register", async (req, res, next) => {
   try {
     const { username, password } = req.body;

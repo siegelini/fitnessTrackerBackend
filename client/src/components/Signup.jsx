@@ -5,6 +5,8 @@ export default function SignUp() {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
+  console.log("username and password:", newUsername, newPassword);
+
   async function handleSubmit(e) {
     e.preventDefault();
 

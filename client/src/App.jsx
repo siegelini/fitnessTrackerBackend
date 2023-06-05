@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import Register from "./components/Register";
+import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import "./App.css";
 
@@ -30,8 +30,8 @@ function App() {
       </p>
       <div className="app">
         <Routes>
-          <Route path="/" element={<Register />} />
-          <Route path="/login" element={<Register />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>

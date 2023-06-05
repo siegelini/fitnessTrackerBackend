@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export default function Register() {
+export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +14,7 @@ export default function Register() {
     e.preventDefault();
     try {
       //const result = await login(username, password);
-      //console.log("result in component", result)
+      //console.log("result of user login", result)
       /*if (result.success === true) {
         setToken(result.data.token)
         localStorage.setItem("token", result.data.token)
