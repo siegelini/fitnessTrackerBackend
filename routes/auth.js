@@ -17,7 +17,7 @@ authRouter.get("/", (req, res, next) => {
 authRouter.post("/register", async (req, res, next) => {
   try {
     const { username, password } = req.body;
-
+    console.log({ username, password });
     if (password.length < 8) {
       next({
         message: "Password should be at least 8 characters long.",
@@ -26,8 +26,10 @@ authRouter.post("/register", async (req, res, next) => {
     }
 
     const existingUser = await getUserByUsername(username);
+
     console.log({ existingUser });
     if (existingUser) {
+      console.log("in the if");
       next({
         message: "Username already exists",
         name: "Authorization Error",
@@ -37,7 +39,7 @@ authRouter.post("/register", async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     const user = await createUser({ username, password: hashedPassword });
-
+    delete user.password;
     const tokenUserNoPassword = { id: user.id, username: user.username };
     const token = jwt.sign(tokenUserNoPassword, JWT_SECRET, {
       expiresIn: "1w",

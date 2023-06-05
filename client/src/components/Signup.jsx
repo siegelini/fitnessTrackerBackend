@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
-
-  console.log("username and password:", newUsername, newPassword);
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log("username and password:", newUsername, newPassword);
 
     try {
       // Make a POST request to server endpoint for creating a new user
@@ -19,12 +19,9 @@ export default function SignUp() {
         },
         body: JSON.stringify({ username: newUsername, password: newPassword }),
       });
-
-      if (response.ok) {
-        console.log("User creation successful!");
-      } else {
-        console.log("User creation failed!");
-      }
+      const result = await response.json();
+      console.log("Result???", result);
+      navigate("/home");
     } catch (error) {
       console.error("Error:", error);
     }

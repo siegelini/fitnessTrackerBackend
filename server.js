@@ -5,14 +5,12 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const { Client } = require("pg");
 const PORT = 3000;
 const app = express();
 
 // PostgreSQL Client
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-});
+const client = require("./db/client");
+client.connect();
 
 // Middleware
 app.use(express.json());
@@ -35,15 +33,6 @@ app.use((err, req, res, next) => {
     name: err.name,
     stack: err.stack,
   });
-});
-
-// Connect to PostgreSQL
-client.connect((err) => {
-  if (err) {
-    console.error("Error connecting to PostgreSQL:", err);
-    return;
-  }
-  console.log("Connected to PostgreSQL database!");
 });
 
 // Server App
