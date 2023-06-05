@@ -13,16 +13,15 @@ export default function Login() {
     console.log("Username and Password", username, password);
     e.preventDefault();
     try {
-      //const result = await login(username, password);
-      //console.log("result of user login", result)
-      /*if (result.success === true) {
-        setToken(result.data.token)
-        localStorage.setItem("token", result.data.token)
-        navigate("/home")
-      } else {
-        alert("login failed")
-      }
-      */
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ username: setUsername, password: setPassword }),
+      });
+      const result = await response.json();
+      console.log("Result for login:", result);
     } catch (error) {
       console.error(error);
     }
@@ -32,7 +31,7 @@ export default function Login() {
     <div className="user-content">
       <h1 className="title">Welcome to Fitness Tracker!</h1>
       <h2>Login</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="username"
           name="username"

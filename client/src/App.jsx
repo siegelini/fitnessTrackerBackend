@@ -25,10 +25,10 @@ function App() {
 
   return (
     <div>
-      <p>
+      {/* <p>
         {error && <p>{JSON.stringify(error, null, 2)}</p>}
         {healthMessage && <p>{healthMessage}</p>}
-      </p>
+      </p> */}
       <div className="app">
         <Routes>
           <Route path="/" element={<Login />} />
