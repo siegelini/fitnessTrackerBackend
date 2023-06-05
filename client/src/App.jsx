@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import "./App.css";
 import Home from "./components/Home";
+import Activites from "./components/Activites";
 
 function App() {
   const [healthMessage, setHealthMessage] = useState(null);
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/activities" element={<Activites />} />
         </Routes>
       </div>
     </div>
