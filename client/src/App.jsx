@@ -37,6 +37,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
           <Route path="/activities" element={<Activites />} />
+          <Route path="/logout" element={<Login />} />
         </Routes>
       </div>
     </div>

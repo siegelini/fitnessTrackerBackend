@@ -12,6 +12,7 @@ const routinesRouter = express.Router();
 //GET /api/routines
 routinesRouter.get("/", async (req, res, next) => {
   try {
+    const { userId } = req.query;
     const routines = await getAllRoutines();
     res.send(routines);
   } catch (error) {
