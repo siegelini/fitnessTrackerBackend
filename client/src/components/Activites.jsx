@@ -6,7 +6,8 @@ export default function Activites() {
 
   useEffect(() => {
     async function fetchActivities() {
-      const getActivities = await getAllActivities();
+      const getActivities = await getAllActivities(); //fetch to /api/activities/
+      //make a file in api
       console.log(getActivities);
     }
     fetchActivities();
