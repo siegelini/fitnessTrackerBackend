@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   // {setToken, user} = useAuth() hooks
 
@@ -22,7 +22,7 @@ export default function Login() {
       });
       const result = await response.json();
       console.log("Result for login:", result);
-      Navigate("/home");
+      navigate("/home");
     } catch (error) {
       console.error(error);
     }

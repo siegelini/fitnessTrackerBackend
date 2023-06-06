@@ -21,7 +21,7 @@ export default function SignUp() {
       });
       const result = await response.json();
       console.log("Result???", result);
-      // navigate("/home");
+      navigate("/home");
     } catch (error) {
       console.error("Error:", error);
     }

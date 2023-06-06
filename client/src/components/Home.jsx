@@ -27,7 +27,7 @@ export default function Home() {
     }
 
     fetchUser();
-  }, [navigate]);
+  }, []);
 
   async function fetchRoutines(userId) {
     try {
@@ -59,7 +59,7 @@ export default function Home() {
       ) : (
         <p>No routines found.</p>
       )}
-      <button onClick={() => navigate("/")}>Logout</button>
+      <button onClick={() => {}}>Logout</button>
     </div>
   );
 }

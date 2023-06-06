@@ -5,9 +5,11 @@ import SignUp from "./components/Signup";
 import "./App.css";
 import Home from "./components/Home";
 import Activites from "./components/Activites";
+import { logout } from "./api/auth";
 
 function App() {
   const [healthMessage, setHealthMessage] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -31,6 +33,22 @@ function App() {
         {healthMessage && <p>{healthMessage}</p>}
       </p> */}
       <div className="app">
+        <nav>
+          <h2>NavBar</h2>
+          <button
+            onClick={async () => {
+              try {
+                const logoutResult = await logout();
+                console.log("logout result: ", logoutResult);
+                setIsLoggedIn(false);
+              } catch (error) {
+                console.error(error);
+              }
+            }}
+          >
+            Logout
+          </button>
+        </nav>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
