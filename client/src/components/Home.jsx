@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   const [user, setUser] = useState(null);
   const [routines, setRoutines] = useState([]);
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchUser() {
@@ -19,7 +19,7 @@ export default function Home() {
         if (response.ok) {
           setUser(result);
         } else {
-          Navigate("/login");
+          navigate("/login");
         }
       } catch (error) {
         console.error(error);
@@ -27,7 +27,7 @@ export default function Home() {
     }
 
     fetchUser();
-  }, [Navigate]);
+  }, [navigate]);
 
   async function fetchRoutines(userId) {
     try {
