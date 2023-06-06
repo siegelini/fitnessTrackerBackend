@@ -1,13 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const Navigate = useNavigate();
 
   // {setToken, user} = useAuth() hooks
-  // we chould change this page to be called the login page
 
   async function handleSubmit(e) {
     console.log("Username and Password", username, password);
@@ -18,10 +18,11 @@ export default function Login() {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ username: setUsername, password: setPassword }),
+        body: JSON.stringify({ username, password }),
       });
       const result = await response.json();
       console.log("Result for login:", result);
+      Navigate("/home");
     } catch (error) {
       console.error(error);
     }
