@@ -6,42 +6,46 @@ export default function Home() {
   const [routines, setRoutines] = useState([]);
   const navigate = useNavigate();
 
+  // This logic can live in your context
+  // useEffect(() => {
+  //   async function fetchUser() {
+  //     try {
+  //       const response = await fetch("/api/users/me", {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-type": "application/json",
+  //         },
+  //       });
+  //       const result = await response.json();
+  //       if (response.ok) {
+  //         setUser(result);
+  //       } else {
+  //         navigate("/login");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+
+  //   fetchUser();
+  // }, []);
+
   useEffect(() => {
-    async function fetchUser() {
+    async function fetchRoutines() {
       try {
-        const response = await fetch("/api/users/me", {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-          },
-        });
+        const response = await fetch(`/api/routines`);
         const result = await response.json();
         if (response.ok) {
-          setUser(result);
+          setRoutines(result);
         } else {
-          navigate("/login");
+          // Handle error still or do I even need an if/else?
         }
       } catch (error) {
         console.error(error);
       }
     }
-
-    fetchUser();
-  }, [navigate]);
-
-  async function fetchRoutines(userId) {
-    try {
-      const response = await fetch(`/api/routines?userId=${userId}`);
-      const result = await response.json();
-      if (response.ok) {
-        setRoutines(result);
-      } else {
-        // Handle error still or do I even need an if/else?
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+    fetchRoutines();
+  }, []);
 
   return (
     <div className="user-content">
@@ -59,7 +63,7 @@ export default function Home() {
       ) : (
         <p>No routines found.</p>
       )}
-      <button onClick={() => navigate("/")}>Logout</button>
+      <button onClick={() => {}}>Logout</button>
     </div>
   );
 }

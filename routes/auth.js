@@ -17,7 +17,7 @@ authRouter.get("/", (req, res, next) => {
 authRouter.post("/register", async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    console.log({ username, password });
+
     if (password.length < 8) {
       next({
         message: "Password should be at least 8 characters long.",
@@ -63,20 +63,23 @@ authRouter.post("/login", async (req, res, next) => {
 
     const user = await getUserByUsername(username);
     if (!user) {
-      throw {
+      next({
         name: "AuthenticationError",
-        message: "Invalid username or password.",
-      };
+        message: "Invalid username",
+      });
+      return;
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      throw {
+      next({
         name: "AuthenticationError",
-        message: "Invalid username or password.",
-      };
+        message: "Invalid password.",
+      });
+      return;
     }
 
+    delete user.password;
     const token = jwt.sign(user, JWT_SECRET, { expiresIn: "1w" });
     res.cookie("token", token, {
       sameSite: "strict",
@@ -84,7 +87,7 @@ authRouter.post("/login", async (req, res, next) => {
       signed: true,
     });
 
-    res.json({ message: "login successful" });
+    res.json({ message: "login successful", user });
   } catch (error) {
     next(error);
   }
@@ -92,8 +95,7 @@ authRouter.post("/login", async (req, res, next) => {
 
 authRouter.get("/logout", async (req, res, next) => {
   try {
-    // need to clear jwt or just the 1 week expire ok?
-    res.clearCookie("token"); // Clear the token cookie
+    res.clearCookie("token");
     res.json({ message: "Logout successful" });
   } catch (error) {
     next(error);
