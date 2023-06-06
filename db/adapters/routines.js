@@ -77,9 +77,7 @@ async function getRoutinesWithoutActivities() {
 async function getAllRoutines() {
   try {
     console.log("..getting all routines");
-    const {
-      rows: [routine],
-    } = await client.query(`
+    const { rows } = await client.query(`
     SELECT 
     routines.id as id,
     routines.name as name,
@@ -103,7 +101,7 @@ async function getAllRoutines() {
   ON routine_activities.activity_id = activities.id
   GROUP BY routines.id, routine_activities.routine_id
     `);
-    return routine;
+    return rows;
   } catch (error) {
     throw error;
   }
