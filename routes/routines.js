@@ -40,8 +40,9 @@ routinesRouter.post("/", async (req, res, next) => {
 routinesRouter.patch("/:routineId", async (req, res, next) => {
   try {
     const { routineId } = req.params;
-    const { name, goal } = req.body;
+    const { name, goal, is_public } = req.body;
     const updatedRoutine = await updateRoutine(routineId, {
+      is_public,
       name,
       goal,
     });
@@ -51,12 +52,12 @@ routinesRouter.patch("/:routineId", async (req, res, next) => {
   }
 });
 
-//DELETE /api/:routineId
+//DELETE /api/routines/:routineId
 routinesRouter.delete("/:routineId", authRouter, async (req, res, next) => {
   try {
     const { routineId } = req.params;
-    await destroyRoutine(routineId);
-    res.sendStatus(204);
+    const deletedRoutine = await destroyRoutine(routineId);
+    res.send(deletedRoutine);
   } catch (error) {
     next(error);
   }

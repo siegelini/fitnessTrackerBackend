@@ -264,7 +264,7 @@ async function getPublicRoutinesByActivity(activity_id) {
   }
 }
 
-async function createRoutine(creatorId, isPublic, name, goal) {
+async function createRoutine({ creator_id, is_public, name, goal }) {
   try {
     console.log("starting to insert ROUTINES into db ");
     const {
@@ -275,7 +275,7 @@ async function createRoutine(creatorId, isPublic, name, goal) {
     VALUES ($1, $2, $3, $4)
     RETURNING *;
     `,
-      [creatorId, isPublic, name, goal]
+      [creator_id, is_public, name, goal]
     );
     return routine;
   } catch (error) {
@@ -283,7 +283,7 @@ async function createRoutine(creatorId, isPublic, name, goal) {
   }
 }
 
-async function updateRoutine(routineId, isPublic, name, goal) {
+async function updateRoutine(routineId, { is_public, name, goal }) {
   try {
     console.log("updating routine...");
     const {
@@ -292,9 +292,10 @@ async function updateRoutine(routineId, isPublic, name, goal) {
       `
     UPDATE routines
     SET is_public = $1, name = $2, goal = $3
-    WHERE id = $4;
+    WHERE id = $4
+    RETURNING *;
     `,
-      [isPublic, name, goal, routineId]
+      [is_public, name, goal, routineId]
     );
     return routine;
   } catch (error) {
@@ -307,18 +308,23 @@ async function destroyRoutine(routineId) {
     console.log("destroying routine...");
     await client.query(
       `
-    DELETE FROM routines
-    WHERE id = $1;
-    `,
-      [routineId]
-    );
-    await client.query(
-      `
-    DELETE FROM activities
+    DELETE FROM routine_activities
     WHERE routine_id = $1;
     `,
       [routineId]
     );
+    const {
+      rows: [deletedRoutine],
+    } = await client.query(
+      `
+    DELETE FROM routines
+    WHERE id = $1
+    RETURNING *;
+    `,
+      [routineId]
+    );
+
+    return deletedRoutine;
   } catch (error) {
     throw error;
   }
