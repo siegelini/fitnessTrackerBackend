@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Navbar from "./Navbar";
 // import { getAllActivities } from "../../../db/adapters/activities";
 
 export default function Activites() {
@@ -15,6 +16,7 @@ export default function Activites() {
 
   return (
     <div>
+      <Navbar />
       <h1>Activities</h1>
       <form>
         <h2>Create A New Activity:</h2>
