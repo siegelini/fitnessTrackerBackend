@@ -41,22 +41,20 @@ async function getActivityById(activityId) {
 async function getAllActivities() {
   try {
     console.log("..getting all activities");
-    const {
-      rows: [activity],
-    } = await client.query(
+    const { rows } = await client.query(
       `
     SELECT *
     FROM activities;
     `
     );
-    return activity;
+    return rows;
   } catch (error) {
     throw error;
   }
 }
 
 //needs help
-async function updateActivity({ activityId, name, description }) {
+async function updateActivity(activityId, { name, description }) {
   try {
     console.log("...updating activity");
     const {

@@ -7,9 +7,14 @@ const {
 } = require("../db/adapters/routine_activities");
 
 //if need later to see if logged in, maybe something like this:
-// const { requireUser, requireOwner } = require("./utility");
+const { requireUser, requireOwner } = require("./utility");
 // const routinesRouter = require("./routines");
 //obviously will need to update the utility if this is how we go to do it.
+
+//GET /api/routine_activities/
+routineActivitiesRouter.get("/", (req, res, next) => {
+  res.body("testing routine_activities!");
+});
 
 // POST /api/routine_activities
 routineActivitiesRouter.post("/", requireUser, async (req, res, next) => {
