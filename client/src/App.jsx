@@ -6,6 +6,7 @@ import "./App.css";
 import Home from "./components/Home";
 import Activites from "./components/Activites";
 import { logout } from "./api/auth";
+import Routines from "./components/Routines";
 
 function App() {
   const [healthMessage, setHealthMessage] = useState(null);
@@ -56,6 +57,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/activities" element={<Activites />} />
           <Route path="/logout" element={<Login />} />
+          <Route path="/routines" element={<Routines />} />
         </Routes>
       </div>
     </div>

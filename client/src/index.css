@@ -55,6 +55,19 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.Navbar-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.Navbar-link {
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  overflow: hidden;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
