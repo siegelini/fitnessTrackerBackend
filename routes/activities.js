@@ -10,9 +10,9 @@ const {
 const activitiesRouter = express.Router();
 
 //GET api/activites/
-activitiesRouter.get("/", (req, res, next) => {
-  res.send("We have Activites!!!");
-});
+// activitiesRouter.get("/", (req, res, next) => {
+//   res.send("We have Activites!!!");
+// });
 
 // GET /activities
 activitiesRouter.get("/", async (req, res, next) => {
