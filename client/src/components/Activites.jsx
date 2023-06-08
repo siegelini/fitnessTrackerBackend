@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 // import { getAllActivities } from "../../../db/adapters/activities";
 
-export default function Activites() {
+export default function Activities() {
   const [activity, setActivity] = useState([]);
 
   useEffect(() => {
