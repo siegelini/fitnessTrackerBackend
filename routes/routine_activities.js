@@ -7,17 +7,12 @@ const {
 } = require("../db/adapters/routine_activities");
 
 //if need later to see if logged in, maybe something like this:
-const { requireUser, requireOwner } = require("./utility");
+const { verifyToken, requireOwner } = require("./utility");
 // const routinesRouter = require("./routines");
 //obviously will need to update the utility if this is how we go to do it.
 
-//GET /api/routine_activities/
-routineActivitiesRouter.get("/", (req, res, next) => {
-  res.body("testing routine_activities!");
-});
-
-// POST /api/routine_activities
-routineActivitiesRouter.post("/", requireUser, async (req, res, next) => {
+// POST / api / routine_activities;
+routineActivitiesRouter.post("/", verifyToken, async (req, res, next) => {
   try {
     const { duration, count, routine_id, activity_id } = req.body;
     const routineActivity = await createRoutineActivities({
@@ -35,7 +30,7 @@ routineActivitiesRouter.post("/", requireUser, async (req, res, next) => {
 // PATCH /api/routine_activities/:routineActivityId
 routineActivitiesRouter.patch(
   "/:routineActivityId",
-  requireUser,
+  verifyToken,
   requireOwner,
   async (req, res, next) => {
     try {
@@ -53,10 +48,10 @@ routineActivitiesRouter.patch(
   }
 );
 
-// DELETE /api/routine_activities/:routineActivityId
+// // DELETE /api/routine_activities/:routineActivityId
 routineActivitiesRouter.delete(
   "/:routineActivityId",
-  requireUser,
+  verifyToken,
   requireOwner,
   async (req, res, next) => {
     try {
