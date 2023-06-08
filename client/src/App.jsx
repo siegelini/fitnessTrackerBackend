@@ -31,9 +31,9 @@ function App() {
   return (
     <div>
       <div className="app">
-        <nav>
+        <header>
           <Navbar />
-        </nav>
+        </header>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
