@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -7,11 +7,12 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // {setToken, user} = useAuth() hooks
-
   async function handleSubmit(e) {
-    console.log("Username and Password", username, password);
     e.preventDefault();
+    if (!username || !password) {
+      console.log("Please enter username and password");
+      return;
+    }
     try {
       const response = await fetch("/api/auth/login", {
         method: "POST",
@@ -20,9 +21,14 @@ export default function Login() {
         },
         body: JSON.stringify({ username, password }),
       });
-      const result = await response.json();
-      console.log("Result for login:", result);
-      navigate("/home");
+
+      if (response.ok) {
+        // Login is successful, navigate to the Home page
+        navigate("/home");
+      } else {
+        // Login failed, display an error message to the user
+        console.log("Invalid username or password");
+      }
     } catch (error) {
       console.error(error);
     }
