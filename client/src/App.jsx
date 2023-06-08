@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Activites from "./components/Activites";
 import { logout } from "./api/auth";
 import Routines from "./components/Routines";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [healthMessage, setHealthMessage] = useState(null);
@@ -29,26 +30,9 @@ function App() {
 
   return (
     <div>
-      {/* <p>
-        {error && <p>{JSON.stringify(error, null, 2)}</p>}
-        {healthMessage && <p>{healthMessage}</p>}
-      </p> */}
       <div className="app">
         <nav>
-          <h2>NavBar</h2>
-          <button
-            onClick={async () => {
-              try {
-                const logoutResult = await logout();
-                console.log("logout result: ", logoutResult);
-                setIsLoggedIn(false);
-              } catch (error) {
-                console.error(error);
-              }
-            }}
-          >
-            Logout
-          </button>
+          <Navbar />
         </nav>
         <Routes>
           <Route path="/" element={<Login />} />

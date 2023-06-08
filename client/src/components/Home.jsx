@@ -50,7 +50,6 @@ export default function Home() {
 
   return (
     <div className="user-content">
-      <Navbar />
       <h1 className="title">Welcome to Fitness Tracker!</h1>
       {user && <h2>Hello, {user.username}!</h2>}
       {routines.length > 0 ? (
@@ -65,13 +64,6 @@ export default function Home() {
       ) : (
         <p>No routines found.</p>
       )}
-      <button
-        onClick={() => {
-          navigate("/login");
-        }}
-      >
-        Logout
-      </button>
     </div>
   );
 }
