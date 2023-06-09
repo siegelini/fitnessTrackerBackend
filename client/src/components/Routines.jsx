@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { deleteRoutine, getRoutines } from "../api/routines";
+import useAuth from "../hooks/useAuth";
 
 export default function Routines() {
+  const { user } = useAuth();
   const [routines, setRoutines] = useState([]);
 
   useEffect(() => {
@@ -14,8 +16,8 @@ export default function Routines() {
     fetchRoutines();
   }, []); // gave a response, need to see how to actually see the routineId in console.
 
-  async function handleDelete() {
-    const response = await deleteRoutine();
+  async function handleDelete(routineId) {
+    const response = await deleteRoutine(routineId);
     console.log("response in handleDelete:", response);
     //invalid syntax error
   }
@@ -36,7 +38,10 @@ export default function Routines() {
           <h3>{routine.name}</h3>
           <p>Id:{routine.id}</p>
           <p>Goal:{routine.goal}</p>
-          <button onClick={handleDelete}>Delete</button>
+
+          {user.id === routine.creator_id && (
+            <button onClick={() => handleDelete(routine.id)}>Delete</button>
+          )}
         </div>
       ))}
       <h2>All Public Routines</h2>

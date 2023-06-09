@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default function Login() {
+  const { setLoggedIn } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -24,6 +26,7 @@ export default function Login() {
 
       if (response.ok) {
         // Login is successful, navigate to the Home page
+        setLoggedIn(true);
         navigate("/home");
       } else {
         // Login failed, display an error message to the user
