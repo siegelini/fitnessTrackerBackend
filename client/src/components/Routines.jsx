@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import { deleteRoutine, getRoutines } from "../api/routines";
+import { addRoutine, deleteRoutine, getRoutines } from "../api/routines";
 import useAuth from "../hooks/useAuth";
 
-export default function Routines() {
+export default function Routines({ setRoutine }) {
   const { user } = useAuth();
   const [routines, setRoutines] = useState([]);
+  const [name, setName] = useState("");
+  const [goal, setGoal] = useState("");
 
   useEffect(() => {
     async function fetchRoutines() {
@@ -22,15 +24,37 @@ export default function Routines() {
     //invalid syntax error
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("name and goal:", name, goal);
+    await addRoutine();
+    console.log("response in adding routine:", response);
+
+    setName("");
+    setGoal("");
+  };
+
   return (
     <div>
       <h1>Routines!</h1>
       {/* make a form to make a routine fetching POST api/routines/ and have name, goal, creator_id, is_public */}
       <h2>Create A New Routine:</h2>
       <form>
-        <input type="name" name="name" placeholder="name" />
-        <input type="goal" name="goal" placeholder="goal" />
-        <button>Submit</button>
+        <input
+          type="text"
+          name="name"
+          placeholder="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="goal"
+          name="goal"
+          placeholder="goal"
+          value={goal}
+          onChange={(e) => setGoal(e.target.value)}
+        />
+        <button onClick={handleSubmit}>Submit</button>
       </form>
       <h2>My Routines</h2>
       {routines.map((routine) => (
@@ -38,7 +62,6 @@ export default function Routines() {
           <h3>{routine.name}</h3>
           <p>Id:{routine.id}</p>
           <p>Goal:{routine.goal}</p>
-
           {user.id === routine.creator_id && (
             <button onClick={() => handleDelete(routine.id)}>Delete</button>
           )}

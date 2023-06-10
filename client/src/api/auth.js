@@ -7,3 +7,18 @@ export async function logout() {
     console.error(error);
   }
 }
+
+export async function fetchMe() {
+  const response = await fetch("/api/auth/me");
+  const { success, message, user } = await response.json();
+  if (!success) {
+    throw {
+      message,
+    };
+  }
+  return {
+    success,
+    message,
+    user,
+  };
+}
