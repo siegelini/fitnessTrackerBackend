@@ -3,8 +3,8 @@ import { fetchMe } from "../../api/auth";
 
 export const AuthContext = createContext();
 
-const AuthProvder = ({ children }) => {
-  const [user, setUser] = useState({ username: "Guest", id: null });
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState({ username: "Guest" });
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -12,7 +12,6 @@ const AuthProvder = ({ children }) => {
       try {
         const { user } = await fetchMe();
         setUser(user);
-        setLoggedIn(true);
       } catch (error) {
         setUser({ username: "Guest" });
       }
@@ -32,4 +31,4 @@ const AuthProvder = ({ children }) => {
   );
 };
 
-export default AuthProvder;
+export default AuthProvider;
