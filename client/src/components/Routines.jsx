@@ -27,7 +27,7 @@ export default function Routines({ setRoutine }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("name and goal:", name, goal);
-    await addRoutine();
+    const response = await addRoutine();
     console.log("response in adding routine:", response);
 
     setName("");
@@ -62,12 +62,17 @@ export default function Routines({ setRoutine }) {
           <h3>{routine.name}</h3>
           <p>Id:{routine.id}</p>
           <p>Goal:{routine.goal}</p>
-          {user.id === routine.creator_id && (
+          {/* {user.id === routine.creator_id && (
             <button onClick={() => handleDelete(routine.id)}>Delete</button>
-          )}
+          )} */}
         </div>
       ))}
       <h2>All Public Routines</h2>
+      {routines.map((routine) => (
+        <div key={routine.id}>
+          <h3></h3>
+        </div>
+      ))}
     </div>
   );
 }

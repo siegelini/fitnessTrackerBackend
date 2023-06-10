@@ -8,6 +8,11 @@ const cookieParser = require("cookie-parser");
 const PORT = 3000;
 const app = express();
 
+// 👇️ handle uncaught exceptions
+process.on("uncaughtException", function (err) {
+  console.log(err);
+});
+
 // PostgreSQL Client
 const client = require("./db/client");
 client.connect();
