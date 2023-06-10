@@ -8,6 +8,7 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  //store creator_id in state?
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,6 +27,7 @@ export default function Login() {
 
       if (response.ok) {
         // Login is successful, navigate to the Home page
+        console.log("response in login:", response);
         setLoggedIn(true);
         navigate("/home");
       } else {

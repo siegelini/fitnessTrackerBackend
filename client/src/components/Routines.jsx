@@ -9,7 +9,11 @@ export default function Routines({ setRoutine }) {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
 
+  console.log("useAuth user:", user);
+  console.log("useAuth:", useAuth());
+
   useEffect(() => {
+    // console.log("user.id:", user); <--- undefined
     async function fetchRoutines() {
       const result = await getRoutines();
       console.log("result from routines:", result);
@@ -27,8 +31,9 @@ export default function Routines({ setRoutine }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("name and goal:", name, goal);
-    const response = await addRoutine();
+    const response = await addRoutine(name, goal);
     console.log("response in adding routine:", response);
+    setRoutines([...routines, response]); //...routines copy the old routines
 
     setName("");
     setGoal("");
@@ -64,6 +69,9 @@ export default function Routines({ setRoutine }) {
           <p>Goal:{routine.goal}</p>
           {/* {user.id === routine.creator_id && (
             <button onClick={() => handleDelete(routine.id)}>Delete</button>
+          )} */}
+          {/* {user.id === routine.creator_id && (
+            <button onClick{() => handleUpdate()>Update</button>}
           )} */}
         </div>
       ))}
