@@ -9,16 +9,11 @@ export async function logout() {
 }
 
 export async function fetchMe() {
-  const response = await fetch("/api/auth/me");
-  const { success, message, user } = await response.json();
-  if (!success) {
-    throw {
-      message,
-    };
+  try {
+    const response = await fetch("/api/users/me");
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
   }
-  return {
-    success,
-    message,
-    user,
-  };
 }

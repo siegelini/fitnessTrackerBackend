@@ -22,6 +22,7 @@ routinesRouter.get("/", async (req, res, next) => {
 
 //POST /api/routines
 routinesRouter.post("/", async (req, res, next) => {
+  console.log(req.body);
   try {
     const { name, goal, creator_id, is_public } = req.body;
     const newRoutine = await createRoutine({
