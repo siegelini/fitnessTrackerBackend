@@ -10,6 +10,11 @@ export default function SignUp() {
     e.preventDefault();
     console.log("username and password:", newUsername, newPassword);
 
+    if (newPassword.length < 8) {
+      console.log("Password should be at least 8 characters long.");
+      return;
+    }
+
     try {
       // Make a POST request to server endpoint for creating a new user
       const response = await fetch("/api/auth/register", {
@@ -21,7 +26,7 @@ export default function SignUp() {
       });
       const result = await response.json();
       console.log("Result???", result);
-      navigate("/home");
+      navigate("/login");
     } catch (error) {
       console.error("Error:", error);
     }

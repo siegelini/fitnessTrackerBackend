@@ -10,7 +10,7 @@ const authRouter = express.Router();
 
 //GET api/auth/
 authRouter.get("/", (req, res, next) => {
-  res.send("We have the Auth router!!!");
+  res.json("We have the Auth router!!!");
 });
 
 //POST api/register
@@ -23,6 +23,7 @@ authRouter.post("/register", async (req, res, next) => {
         message: "Password should be at least 8 characters long.",
         name: "Authorization Error",
       });
+      return;
     }
 
     const existingUser = await getUserByUsername(username);
