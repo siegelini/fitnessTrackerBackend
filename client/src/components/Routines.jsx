@@ -39,7 +39,7 @@ export default function Routines({ setRoutine }) {
       <h1>Routines!</h1>
       {/* make a form to make a routine fetching POST api/routines/ and have name, goal, creator_id, is_public */}
       <h2>Create A New Routine:</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="name"
@@ -54,7 +54,7 @@ export default function Routines({ setRoutine }) {
           value={goal}
           onChange={(e) => setGoal(e.target.value)}
         />
-        <button onClick={handleSubmit}>Submit</button>
+        <button>Submit</button>
       </form>
       <h2>My Routines</h2>
       {routines.map((routine) => (
