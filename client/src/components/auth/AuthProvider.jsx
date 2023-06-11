@@ -4,7 +4,7 @@ import { fetchMe } from "../../api/auth";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({ username: "Guest" });
+  const [user, setUser] = useState({ id: null, username: "Guest" });
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {

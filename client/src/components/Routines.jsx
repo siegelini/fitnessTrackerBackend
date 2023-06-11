@@ -9,9 +9,6 @@ export default function Routines({ setRoutine }) {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
 
-  console.log("useAuth user:", user);
-  console.log("useAuth:", useAuth());
-
   useEffect(() => {
     // console.log("user.id:", user); <--- undefined
     async function fetchRoutines() {
