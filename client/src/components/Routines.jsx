@@ -37,7 +37,7 @@ export default function Routines({ setRoutine }) {
   };
 
   return (
-    <div>
+    <div className="routines-content">
       <h1>Routines!</h1>
       {/* make a form to make a routine fetching POST api/routines/ and have name, goal, creator_id, is_public */}
       <h2>Create A New Routine:</h2>
@@ -59,19 +59,21 @@ export default function Routines({ setRoutine }) {
         <button>Submit</button>
       </form>
       <h2>My Routines</h2>
-      {routines.map((routine) => (
-        <div key={routine.id} className="Routine-card">
-          <h3>{routine.name}</h3>
-          <p>Id:{routine.id}</p>
-          <p>Goal:{routine.goal}</p>
-          {/* {user.id === routine.creator_id && (
+      <div className="all-routine-cards">
+        {routines.map((routine) => (
+          <div key={routine.id} className="routine-card">
+            <h3>{routine.name}</h3>
+            <h5>Goal:</h5>
+            <p>{routine.goal}</p>
+            {/* {user.id === routine.creator_id && (
             <button onClick={() => handleDelete(routine.id)}>Delete</button>
           )} */}
-          {/* {user.id === routine.creator_id && (
+            {/* {user.id === routine.creator_id && (
             <button onClick{() => handleUpdate()>Update</button>}
           )} */}
-        </div>
-      ))}
+          </div>
+        ))}
+      </div>
       <h2>All Public Routines</h2>
       {routines.map((routine) => (
         <div key={routine.id}>

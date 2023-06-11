@@ -55,6 +55,14 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* NAVBAR*/
+.Nav {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 2px solid;
+}
+
 .Navbar-list {
   display: flex;
   flex-direction: row;
@@ -66,6 +74,50 @@ button:focus-visible {
   padding: 14px 16px;
   text-decoration: none;
   overflow: hidden;
+}
+
+/* HOME PAGE */
+
+.title {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid;
+}
+
+.routines-section {
+  margin-right: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.routine-activity-section {
+  display: flex;
+}
+
+.list {
+  list-style-type: circle;
+  margin-right: 33px;
+}
+
+.RA-li {
+  margin: 10px;
+}
+
+/* ROUTINES PAGE */
+
+.routine-card {
+  flex-basis: 200px;
+  flex-grow: 1;
+  margin: 5px 10px;
+  padding: 10px;
+  border: 3px solid;
+}
+
+.all-routine-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 @media (prefers-color-scheme: light) {

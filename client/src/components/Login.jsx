@@ -1,19 +1,13 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 export default function Login() {
-  const { loggedIn, setLoggedIn } = useAuth();
+  const { setLoggedIn } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (loggedIn) {
-      navigate("/home");
-    }
-  }, [loggedIn, navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,10 +23,8 @@ export default function Login() {
         },
         body: JSON.stringify({ username, password }),
       });
-
+      console.log("response in sign up:", response);
       if (response.ok) {
-        const { message, user } = await response.json();
-        console.log(message);
         setLoggedIn(true);
         navigate("/home");
       } else {
