@@ -19,7 +19,7 @@ export default function Navbar() {
   };
 
   return (
-    <div>
+    <div className="Nav">
       <ul className="Navbar-list">
         <li className="Navbar-link">
           <Link style={{ color: "red" }} to="/routines">
