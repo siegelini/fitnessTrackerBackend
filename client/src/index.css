@@ -120,6 +120,22 @@ button:focus-visible {
   justify-content: space-evenly;
 }
 
+/* ACTIVITIES PAGE */
+
+.Activity-card {
+  flex-basis: 200px;
+  flex-grow: 1;
+  margin: 5px 10px;
+  padding: 10px;
+  border: 3px solid;
+}
+
+.all-activities {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
