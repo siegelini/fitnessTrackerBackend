@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
 import "./App.css";
@@ -8,6 +8,7 @@ import Activites from "./components/Activites";
 import { logout } from "./api/auth";
 import Routines from "./components/Routines";
 import Navbar from "./components/Navbar";
+import useAuth from "./hooks/useAuth";
 
 function App() {
   const [healthMessage, setHealthMessage] = useState(null);

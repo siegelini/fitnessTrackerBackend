@@ -1,14 +1,19 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 export default function Login() {
-  const { setLoggedIn } = useAuth();
+  const { loggedIn, setLoggedIn } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  //store creator_id in state?
+
+  useEffect(() => {
+    if (loggedIn) {
+      navigate("/home");
+    }
+  }, [loggedIn, navigate]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -26,8 +31,8 @@ export default function Login() {
       });
 
       if (response.ok) {
-        // Login is successful, navigate to the Home page
-        console.log("response in login:", response);
+        const { message, user } = await response.json();
+        console.log(message);
         setLoggedIn(true);
         navigate("/home");
       } else {

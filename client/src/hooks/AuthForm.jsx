@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { registerUser, loginUser } from "../../api/auth";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 import useAuth from "../../hooks/useAuth";
 
 export default function AuthForm() {
@@ -24,6 +25,8 @@ export default function AuthForm() {
       if (result.success) {
         setLoggedIn(true);
         navigate("/");
+      } else {
+        setError(result.error);
       }
     } catch (error) {
       setError(error.message);
