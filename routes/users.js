@@ -1,7 +1,7 @@
-const { getUserByUsername } = require("../db/adapters/users");
-const { verifyToken } = require("../routes/utility");
-
 const express = require("express");
+const { verifyToken } = require("../routes/utility");
+const { getUserByUsername } = require("../db/adapters/users");
+
 const userRouter = express.Router();
 
 //GET /api/users/
@@ -12,8 +12,16 @@ userRouter.get("/", (req, res, next) => {
 //GET /api/users/me
 userRouter.get("/me", verifyToken, async (req, res, next) => {
   try {
-    const { id, username } = req.user;
-    res.json({ id, username });
+    const { username } = req.user;
+    const user = await getUserByUsername(username);
+    if (!user) {
+      throw {
+        name: "NotFoundError",
+        message: "User not found.",
+      };
+    }
+
+    res.json(user);
   } catch (error) {
     next(error);
   }

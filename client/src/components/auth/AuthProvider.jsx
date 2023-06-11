@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { fetchMe } from "../../api/auth";
+import Navbar from "../Navbar";
 
 export const AuthContext = createContext();
 

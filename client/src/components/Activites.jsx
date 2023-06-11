@@ -48,43 +48,38 @@ export default function Activities() {
 
   return (
     <div className="ActivitiesPost-content">
-      <h1 className="ActivitiesFormTitle">Hello Power User!</h1>
-
+      <h1 className="ActivitiesFormTitle">Activities!</h1>
+      <h2 className="ActivitiesFormSubTitle">Create a New Activity:</h2>
       <form className="ActivitiesPost-form" onSubmit={handleSubmit}>
-        <label>Name:</label>
         <input
           type="text"
+          name="name"
+          placeholder="name"
           value={newActivityName}
           onChange={(e) => setNewActivityName(e.target.value)}
         />
-        <br />
-
-        <label>Description:</label>
-        <textarea
+        <input
+          type="text"
+          placeholder="Description"
           value={newActivityDescription}
           onChange={(e) => setNewActivityDescription(e.target.value)}
         />
-        <br />
-
-        {error && <p>{error}</p>}
-
-        <button type="submit">Create Activity</button>
+        <button>Submit</button>
       </form>
 
-      <div>
-        <h3>All Activities:</h3>
-        {activities.length > 0 ? (
-          <ul>
-            {activities.map((activity) => (
-              <li key={activity.id}>
-                <strong>{activity.name}</strong> - {activity.description}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No activities found.</p>
-        )}
-      </div>
+      <h2>All Activities:</h2>
+      {activities.length > 0 ? (
+        <div>
+          {activities.map((activity) => (
+            <div key={activity.id} classname="Activity-card">
+              <h3>{activity.name}</h3>
+              <p>Description: {activity.description}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>No activities found.</p>
+      )}
     </div>
   );
 }
