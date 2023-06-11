@@ -29,7 +29,7 @@ activitiesRouter.post("/", async (req, res, next) => {
   try {
     const { name, description } = req.body;
     const newActivity = await createActivities({ name, description });
-    res.status(201).json(newActivity);
+    res.send(newActivity);
   } catch (error) {
     next(error);
   }
