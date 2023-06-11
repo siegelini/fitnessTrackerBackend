@@ -7,7 +7,6 @@ export default function Home() {
   const [routines, setRoutines] = useState([]);
   const navigate = useNavigate();
 
-  // This logic can live in your context
   // useEffect(() => {
   //   async function fetchUser() {
   //     try {
@@ -39,7 +38,6 @@ export default function Home() {
         if (response.ok) {
           setRoutines(result);
         } else {
-          // Handle error still or do I even need an if/else?
         }
       } catch (error) {
         console.error(error);

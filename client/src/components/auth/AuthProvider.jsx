@@ -12,12 +12,18 @@ const AuthProvider = ({ children }) => {
       try {
         const { user } = await fetchMe();
         setUser(user);
+        if (Object.keys(user).length > 0) {
+          setLoggedIn(true);
+        } else {
+          setLoggedIn(false);
+        }
       } catch (error) {
         setUser({ username: "Guest" });
+        setLoggedIn(false);
       }
     }
     getMe();
-  }, [loggedIn]);
+  }, []);
 
   const contextValue = {
     user,
