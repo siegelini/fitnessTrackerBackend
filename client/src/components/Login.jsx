@@ -39,23 +39,25 @@ export default function Login() {
   return (
     <div className="user-content">
       <h1 className="title">Welcome to Fitness Tracker!</h1>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="username"
-          name="username"
-          placeholder="username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button>Submit</button>
-        <Link to="/signup">Don't have an account? Sign Up</Link>
-      </form>
+      <div className="Login">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit} className="Login-form">
+          <input
+            type="username"
+            name="username"
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="button">Submit</button>
+          <Link to="/signup">Don't have an account? Sign Up</Link>
+        </form>
+      </div>
     </div>
   );
 }

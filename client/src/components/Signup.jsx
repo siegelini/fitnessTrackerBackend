@@ -35,28 +35,30 @@ export default function SignUp() {
   return (
     <div className="user-content">
       <h1 className="title">Welcome to Fitness Tracker!</h1>
-      <h2>Sign up to be part of something awesome!</h2>
-      <form className="user-form" onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="newUsername"
-          placeholder="Enter new username"
-          value={newUsername}
-          onChange={(e) => setNewUsername(e.target.value)}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          name="newPassword"
-          placeholder="Enter new password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-        />
-        <button type="submit">Sign Up</button>
-        <br></br>
-        <Link to="/login">Already have an account? Login</Link>
-      </form>
+      <div className="Login">
+        <h2>Sign up to be part of something awesome!</h2>
+        <form className="Login-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="newUsername"
+            placeholder="Enter new username"
+            value={newUsername}
+            onChange={(e) => setNewUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            name="newPassword"
+            placeholder="Enter new password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+          <button type="submit" className="button">
+            Sign Up
+          </button>
+          <br></br>
+          <Link to="/login">Already have an account? Login</Link>
+        </form>
+      </div>
     </div>
   );
 }
