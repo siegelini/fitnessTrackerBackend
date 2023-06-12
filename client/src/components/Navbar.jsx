@@ -22,6 +22,11 @@ export default function Navbar() {
     <div className="Nav">
       <ul className="Navbar-list">
         <li className="Navbar-link">
+          <Link style={{ color: "red" }} to="/home">
+            Home
+          </Link>
+        </li>
+        <li className="Navbar-link">
           <Link style={{ color: "red" }} to="/routines">
             Routines
           </Link>

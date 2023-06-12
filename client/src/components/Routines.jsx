@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import { addRoutine, deleteRoutine, getRoutines } from "../api/routines";
+import {
+  addRoutine,
+  deleteRoutine,
+  editRoutine,
+  getRoutines,
+} from "../api/routines";
 import useAuth from "../hooks/useAuth";
 
 export default function Routines({ setRoutine }) {
-  const { user } = useAuth();
   const [routines, setRoutines] = useState([]);
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
@@ -22,7 +26,15 @@ export default function Routines({ setRoutine }) {
   async function handleDelete(routineId) {
     const response = await deleteRoutine(routineId);
     console.log("response in handleDelete:", response);
-    //invalid syntax error
+    const responseRoutine = await getRoutines();
+    console.log("result from deleting post:", responseRoutine);
+    setRoutines([...responseRoutine]);
+  }
+
+  async function handleEdit(routineId) {
+    const response = await editRoutine(routineId);
+    console.log("response in handleEdit:", response);
+    // can not edit routine, I get an error
   }
 
   const handleSubmit = async (e) => {
@@ -65,16 +77,15 @@ export default function Routines({ setRoutine }) {
             <h3>{routine.name}</h3>
             <h5>Goal:</h5>
             <p>{routine.goal}</p>
+            <button onClick={() => handleDelete(routine.id)}>Delete</button>
+            <button onClick={() => handleEdit(routine.id)}>Edit</button>
             {/* {user.id === routine.creator_id && (
             <button onClick={() => handleDelete(routine.id)}>Delete</button>
-          )} */}
-            {/* {user.id === routine.creator_id && (
-            <button onClick{() => handleUpdate()>Update</button>}
-          )} */}
+          )} <--- allows user to delete a post(this did not work)*/}
           </div>
         ))}
       </div>
-      <h2>All Public Routines</h2>
+      <h2>All Public Routines:</h2>
       {routines.map((routine) => (
         <div key={routine.id}>
           <h3></h3>
